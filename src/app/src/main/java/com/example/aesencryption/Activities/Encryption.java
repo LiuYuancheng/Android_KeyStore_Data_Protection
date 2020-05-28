@@ -43,11 +43,11 @@ public class Encryption extends Activity {
     @BindView(R.id.encBtn)
     Button encBtn;
 
-    KeyGenerator keyGenerator;
-    SecretKey secretKey;
+    KeyGenerator keyGenerator;  // Java Key generator used to import the android keystore
+    SecretKey secretKey;        // Java AES Key
     byte[] secretKeyen;
     String strSecretKey;
-    String aeskey;
+    String aeskey;              // deployed key string used to encrypted the message.
     byte[] IV = new byte[16];
     // Create a fixed IV here:
     byte[] myIV = "\u00e0\u004f\u00d0\u0020\u00ea\u003a\u0069\u0010\u00a2\u00d8\u0008\u0000\u002b\u0030\u0030\u009d".getBytes();
@@ -69,13 +69,11 @@ public class Encryption extends Activity {
             t.show();
         } else {
             try {
-                /*Keygenerator simetrik şifreleme anahtarı üretmek için kullanılan bir kütüphanedir.Öncelikle KeyGenerator kurulumu yapılır
-                 * getInstance ile algoritma isminin bir parametre olarak alınması engellenir.*/
                 keyGenerator = KeyGenerator.getInstance("AES");
             } catch (NoSuchAlgorithmException e) {
                 e.printStackTrace();
             }
-            // The hardcodekey String we are going to use
+            // The hard code key String we are going to use :
             String hardcodekey = new String("okjkT06mZKLdJKdGRVpJPpbQTcgv2X0NCDqwavYCEbQ=");
             // Key generation
             keyGenerator.init(256);// init yöntemiyle oluşturulan KeyGenerator örneği başlatılır.Burada 256bit değer kullanıldı.
